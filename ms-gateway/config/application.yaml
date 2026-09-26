@@ -1,0 +1,9 @@
+port: 8080
+
+
+application:
+  gateway:
+    routes:
+      - id: ms-flight
+        uri: http://ms-flight:8060
+        pathPrefix: /flights
