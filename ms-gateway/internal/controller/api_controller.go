@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"errors"
 	"sync"
 
 	coreController "github.com/CakeForKit/rsoi-lab2/lb-core/controller"
@@ -48,7 +49,14 @@ func username(c *gin.Context) (string, bool) {
 	}
 	return u, true
 }
-func failure(c *gin.Context, e error) { c.JSON(http.StatusBadRequest, gin.H{"message": e.Error()}) }
+func failure(c *gin.Context, e error) {
+	var unavailable *service.UnavailableError
+	if errors.As(e, &unavailable) {
+		c.JSON(http.StatusServiceUnavailable, gin.H{"message": unavailable.Error()})
+		return
+	}
+	c.JSON(http.StatusBadRequest, gin.H{"message": e.Error()})
+}
 func (a *apiController) flights(c *gin.Context) {
 	p, _ := strconv.Atoi(c.DefaultQuery("page", "0"))
 	s, _ := strconv.Atoi(c.DefaultQuery("size", "10"))

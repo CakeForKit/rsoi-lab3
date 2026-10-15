@@ -1,26 +1,39 @@
 {
-	"id": "cc712d67-c1f8-4094-a082-1b288efa7b78",
-	"name": "[rsoi][local] Flight Service",
-	"values": [
-		{
-			"key": "baseUrl",
-			"value": "http://localhost:8080"
-		},
-		{
-			"key": "flightNumber",
-			"value": ""
-		},
-		{
-			"key": "ticketUid",
-			"value": ""
-		},
-		{
-			"key": "username",
-			"value": ""
-		},
-		{
-			"key": "balance",
-			"value": ""
-		}
-	]
+  "_": {
+    "postman_variable_scope": "environment",
+    "postman_exported_at": "2026-10-15T19:48:39.483Z",
+    "postman_exported_using": "Newman/6.2.2"
+  },
+  "id": "cc712d67-c1f8-4094-a082-1b288efa7b78",
+  "name": "[rsoi][local] Flight Service",
+  "values": [
+    {
+      "type": "any",
+      "value": "http://localhost:8080",
+      "key": "baseUrl"
+    },
+    {
+      "type": "any",
+      "value": "AFL031",
+      "key": "flightNumber"
+    },
+    {
+      "type": "any",
+      "value": "de1f9bb5-7fa1-4ec5-802b-6ea4cd1cec90",
+      "key": "ticketUid"
+    },
+    {
+      "type": "any",
+      "value": "Test Max",
+      "key": "username"
+    },
+    {
+      "type": "any",
+      "value": 450,
+      "key": "balance"
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2026-10-15T19:49:11.482Z",
+  "_postman_exported_using": "Newman/6.2.2"
 }
