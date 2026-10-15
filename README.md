@@ -4,6 +4,7 @@
 
 ## Fault Tolerance
 
+
 ### Формулировка
 
 На базе [Лабораторной работы #2](https://github.com/bmstu-rsoi/lab2-template) реализовать механизмы, увеличивающие
