@@ -1,7 +1,7 @@
 {
   "_": {
     "postman_variable_scope": "environment",
-    "postman_exported_at": "2026-10-15T20:10:35.053Z",
+    "postman_exported_at": "2026-10-17T11:09:34.905Z",
     "postman_exported_using": "Newman/6.2.2"
   },
   "id": "cc712d67-c1f8-4094-a082-1b288efa7b78",
@@ -19,7 +19,7 @@
     },
     {
       "type": "any",
-      "value": "c50318d6-e91d-411f-a9e9-8ea57f49134a",
+      "value": "820ff144-3856-49ea-9b5e-bc0b9986d05f",
       "key": "ticketUid"
     },
     {
@@ -34,6 +34,6 @@
     }
   ],
   "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2026-10-15T20:11:07.012Z",
+  "_postman_exported_at": "2026-10-17T11:10:06.856Z",
   "_postman_exported_using": "Newman/6.2.2"
 }

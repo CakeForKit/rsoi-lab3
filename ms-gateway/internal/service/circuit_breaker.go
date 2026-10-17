@@ -7,14 +7,15 @@ import (
 
 const (
 	circuitFailureThreshold = 3
+	circuitFailureWindow    = 3 * time.Second
 	circuitRetryTimeout     = 3 * time.Second
 )
 
-// circuitBreaker прекращает запросы к недоступному сервису после нескольких
-// последовательных ошибок и периодически проверяет его восстановление.
 type circuitBreaker struct {
 	mu          sync.Mutex
-	failures    int
+	failures    [circuitFailureThreshold]time.Time
+	next        int
+	count       int
 	openedAt    time.Time
 	halfOpenRun bool
 }
@@ -38,7 +39,13 @@ func (c *circuitBreaker) success() {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
-	c.failures = 0
+	if !c.halfOpenRun {
+		return
+	}
+
+	c.failures = [circuitFailureThreshold]time.Time{}
+	c.next = 0
+	c.count = 0
 	c.openedAt = time.Time{}
 	c.halfOpenRun = false
 }
@@ -53,8 +60,20 @@ func (c *circuitBreaker) failure() {
 		return
 	}
 
-	c.failures++
-	if c.failures >= circuitFailureThreshold {
-		c.openedAt = time.Now()
+	fallenAt := time.Now()
+	c.failures[c.next] = fallenAt
+	if c.count < circuitFailureThreshold {
+		c.count++
+	}
+	c.next = (c.next + 1) % circuitFailureThreshold
+
+	if c.count < circuitFailureThreshold {
+		return
+	}
+
+	head := c.failures[c.next]
+	tail := c.failures[(c.next+circuitFailureThreshold-1)%circuitFailureThreshold]
+	if tail.Sub(head) <= circuitFailureWindow {
+		c.openedAt = fallenAt
 	}
 }
